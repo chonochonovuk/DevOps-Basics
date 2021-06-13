@@ -1,0 +1,4 @@
+- name: Install PHP MySQL dependencies (Debian).
+  apt:
+    name: php7.4-mysql
+    state: present 

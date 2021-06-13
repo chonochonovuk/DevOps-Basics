@@ -1,0 +1,24 @@
+Създаване на Vagrant basebox с Ubuntu-server 20.04LTS с описани и снимани стъпки:
+
+!.Сваляне на Ubuntu Server 20.04lts 
+2.Създване на simple VM with minimal parameters.
+3.Инсталиране на ОС с OpenSSh на VM.
+4.The most efficient way I’ve found to setup the vagrant user so it’s able to use sudo without being prompted for a password is to add it to the sudoers list like this:
+
+  sudo visudo -f /etc/sudoers.d/vagrant
+  
+5.Upgrading OS
+6.Installing Guest Tools
+7.Insert Guest Additions CD Image
+8.Add the vagrant user to the vboxsf group.
+9.Install the vagrant insecure key
+10.vagrant package --base
+11.Refactor web.sh and db.sh and change VagrantFile to use my box 
+12.Change mariadb bindingport on db to 0.0.0.0
+13.Вдигане на VMs с Vagrant ползвайки конфигурациите в (M1-3-2)
+
+
+ П.С. Не видях анкетата за ОС. Аз използвам Федора 32. 
+
+
+

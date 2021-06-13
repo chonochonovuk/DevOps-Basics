@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  api_service:
+    image: "javaspring:1.0"
+    deploy:
+      replicas: 3
+    ports:
+      - "8080:8080"
+    networks:
+      - swrm-network
+    depends_on:
+      - db
+    environment:
+      JDBC_DATABASE_DRIVER: org.mariadb.jdbc.Driver
+      JDBC_DATABASE_URL: jdbc:mariadb://db:3306/estate_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
+      JDBC_DATABASE_USERNAME: chono
+      JDBC_DATABASE_PASSWORD: chono0511
+      HIBERNATE_DIALECT: ${HIBERNATE_DIALECT}
+  db:
+    image: "mariadb:10.5.8"
+    ports:
+      - "3306"
+    networks:
+      - swrm-network
+    environment:
+      MYSQL_DATABASE: estate_db
+      MYSQL_USER: chono
+      MYSQL_PASSWORD: chono0511
+      MYSQL_ROOT_PASSWORD: nE5kMc7JCGNqwDQN
+
+networks:
+    swrm-network:

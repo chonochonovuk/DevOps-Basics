@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+    swrm-php:
+        image: "bulphp:1.0"
+        deploy:
+          replicas: 3
+        ports:
+            - 8080:80
+        volumes:
+            - "/vagrant/web:/var/www/html:ro"
+        networks:
+            - swrm-network
+        depends_on:
+            - swrm-mysql
+        environment:
+            MYSQL_DATABASE: bulgaria
+            MYSQL_USER: web_user
+            MYSQL_PASSWORD: Password1
+
+    swrm-mysql:
+        image: "bulsql:1.0"
+        networks:
+            - swrm-network
+        environment:
+            MYSQL_ROOT_PASSWORD: nE5kMc7JCGNqwDQN
+
+networks:
+    swrm-network:

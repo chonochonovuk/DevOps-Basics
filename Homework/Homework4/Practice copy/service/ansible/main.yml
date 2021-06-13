@@ -1,0 +1,11 @@
+---
+- hosts: webservers
+  become: true
+  roles:
+    - apache2-ubuntu
+    - php-mysql-Ubuntu
+    
+- hosts: dbservers
+  become: true
+  roles:
+    - mariadb-ubuntu

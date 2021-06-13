@@ -1,0 +1,7 @@
+1.Build 3 simple Ubuntu based VMs with Vagrant. One Ansible Control Server and two Remote Servers.
+2.Use ssh-keygen generate key and copy it to the other station.
+3.Dockerfile for creating an NGINX image.
+4.Create playbook - main.yml
+5.Execute the playbook
+6.Nginx default page to localhost
+

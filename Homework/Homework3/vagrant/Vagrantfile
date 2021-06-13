@@ -1,0 +1,37 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.ssh.insert_key = false
+  
+
+  config.vm.define "manager" do |manager|
+    manager.vm.box="chono-ubuntu-server-v2"
+    manager.vm.hostname = "manager.dob.lab"
+    manager.vm.network "private_network", ip: "192.168.89.100"
+    manager.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+    manager.vm.synced_folder "service/", "/vagrant"
+    manager.vm.provision "shell", path: "manager.sh"
+  end
+
+  config.vm.define "worker1" do |worker1|
+    worker1.vm.box="chono-ubuntu-server-v2"
+    worker1.vm.hostname = "worker1.dob.lab"
+    worker1.vm.network "private_network", ip: "192.168.89.101"
+    worker1.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+    worker1.vm.synced_folder "service/", "/vagrant"
+    worker1.vm.provision "shell", path: "worker1.sh"
+  end
+
+   config.vm.define "worker2" do |worker2|
+    worker2.vm.box="chono-ubuntu-server-v2"
+    worker2.vm.hostname = "worker2.dob.lab"
+    worker2.vm.network "forwarded_port", guest: 8080, host: 8080, auto_correct: true
+    worker2.vm.network "private_network", ip: "192.168.89.102"
+    worker2.vm.synced_folder "service/", "/vagrant"
+    worker2.vm.provision "shell", path: "worker2.sh"
+  end
+
+end
+ 

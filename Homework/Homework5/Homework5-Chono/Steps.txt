@@ -1,0 +1,2 @@
+1.Create Master and Slave Ubuntu based VMs with vagrant
+2.Create a scripts for provisioning master and slave node with the dependencies needed 

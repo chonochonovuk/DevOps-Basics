@@ -1,0 +1,6 @@
+---
+# vars file for mariadb
+db_host: "db"
+db_username: "web_user"
+db_password: "Password1"
+db_name: "bulgaria"

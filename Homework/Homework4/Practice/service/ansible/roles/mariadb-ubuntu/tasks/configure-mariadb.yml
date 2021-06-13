@@ -1,0 +1,5 @@
+- name: Make mariadb server file configuration
+  template:
+    src: templates/50-server.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+  notify: restart mariadb server

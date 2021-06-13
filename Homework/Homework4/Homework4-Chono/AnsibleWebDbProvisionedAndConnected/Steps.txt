@@ -1,0 +1,6 @@
+1.Write playbook with roles for Ubuntu based Apache Server and MariaDb
+2.Use Handlers, Conditional Clasues, Register Tasks, Include Tasks and Jinja2 template for configuring mariadb.
+3.Instead of taking photos I will attach the folder ( VagrantAnsible ) which has all the files and code needed to run and connect two remote servers.
+4.In order for control server to communicate with remote hosts I use ssh-keygen and ssh-copy-id.  
+5.Photo of executing ansible-playbook
+6.Photos of working web site that communicate with remote db server.

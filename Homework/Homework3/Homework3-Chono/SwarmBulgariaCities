@@ -1,0 +1,11 @@
+1.Create docker image from Dockerfile with pdo_mysql
+2.Create docker image for mariadb
+3.Vagrantfile for 3 VMs
+4.Create three provisioning scripts - manager.sh, worker1.sh, worker2.sh
+5.Stack with Docker-Compose
+6.Vagrant up one manager and two workers
+7.Init swarm manager and join the workers
+8.Save and Load Images needed for each node 
+9.Deploy stack 
+10.Working
+11.Experimenting with my personal Spring Project deployed with Docker Compose in Swarm 

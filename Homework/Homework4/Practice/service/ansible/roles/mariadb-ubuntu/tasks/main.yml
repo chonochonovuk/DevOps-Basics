@@ -1,0 +1,32 @@
+- name: Run the equivalent of apt-get update as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install MariaDb Server for Debian Based Linux Distro
+  apt:
+    name: mariadb-server
+    state: present
+
+- name: Start and enable MariaDB
+  service:
+    name: mariadb
+    state: started
+    enabled: true
+    
+- name: Configure MariaDB server
+  include_tasks: configure-mariadb.yml
+
+- name: Copy database init script table.sql
+  copy:
+    src: db_setup.sql
+    dest: /tmp/
+    
+- name: check if DB exists
+  shell: mysql --user={{ db_username }} --password={{ db_password }} -e 'SHOW DATABASES;' | grep -c {{ db_name }}
+  register: dbstatus
+  failed_when: dbstatus.rc == 2
+
+- name: Run sql script
+  shell: mysql -u root < /tmp/db_setup.sql
+  when: dbstatus.stdout == "0"
+  
