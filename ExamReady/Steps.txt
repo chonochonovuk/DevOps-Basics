@@ -1,0 +1,5 @@
+1.Building 4 VMs with mine Ubuntu-Server 20.04. based Vagrant Box.
+2.Provisioning only Ansible wih skript.
+3.Instalation of Nagios and NAGIOS-NRPE-SERVER cannot be automated, beacause of Postfix Dialog Box which appear during installation.
+4.Manual install Nagios and NAGIOS-NRPE-SERVER, but Provisioning them with necessary files with Ansible.
+5.Use ssh-keygen generate key and copy it to the other station. For Ansible Control Server.

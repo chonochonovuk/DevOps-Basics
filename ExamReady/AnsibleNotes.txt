@@ -1,0 +1,6 @@
+Distribute SSH keys to communicate with other machines.
+1.ssh-keygen
+2.ssh-copy-id 192.168.99.101
+3.ssh-copy-id 192.168.99.102
+4.ssh-copy-id 192.168.99.103
+5.Update jenkinsHost cache - sudo apt-get update -y

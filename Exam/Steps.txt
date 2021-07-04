@@ -1,0 +1,46 @@
+1.Building 4 VMs with mine Ubuntu-Server 20.04. based Vagrant Box.
+2.Name convention, dedicaded network 192.168.120.0/24 and port as required and can be checked in Vagrantfile.
+3.Provisioning only Ansible wih skript with which we install ansible, add host and download 3rd parties roles for Jenkinks and Java. 
+4.Instalation of Nagios and NAGIOS-NRPE-SERVER cannot be automated, beacause of Postfix Dialog Box which appear during installation.
+5.Manual install Nagios and NAGIOS-NRPE-SERVER, but Provisioning them with necessary files with Ansible.
+6.Use ssh-keygen generate key and copy it to the other station. For Ansible Control Server.
+7.Run ansible-playbook to provision Docker Host with Docker, create dob-network,install Java, replace Nrpe cfg and copy Nrpe Docker custom plugin, 
+  Nagios Host with custom cfg and etc.,
+  Jankins Host with Java, Jenkins and Jenkins plugins.
+8.After 1 hour lost with Ansible and 
+ASK [geerlingguy.jenkins : Wait for Jenkins to start up before proceeding.] ***************************************************************************************************************************************************************
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (60 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (59 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (58 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (57 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (56 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (55 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (54 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (53 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (52 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (51 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (50 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (49 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (48 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (47 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (46 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (45 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (44 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (43 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (42 retries left).
+FAILED - RETRYING: Wait for Jenkins to start up before proceeding. (41 retries left).
+
+9.Manual Install Jenkins
+
+10.Docker Host task done by Ansible 
+Create a dedicated network (dob-network) for the containers
+
+11.Docker Host task done remotely by Jenkins slave
+
+Run and attach the containers to the dedicated network
+
+Working containerized application as expected
+
+Application reachable on the host (via port forwarding)
+
+THE LAST PART WORK ONLY ON DOCKER HOST AND PORT IS reachable if i have time , but i don't I would fix it.

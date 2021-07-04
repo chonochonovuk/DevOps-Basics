@@ -1,0 +1,26 @@
+---
+# Supply Nrpe Agent with files needed
+- name: Run the equivalent of apt-get update as a separate step
+  apt:
+    update_cache: yes
+    
+- name: Substitute nrpe.cfg
+  copy:
+    src: nrpe.cfg
+    dest: /etc/nagios/nrpe.cfg
+    
+- name: Copy additional docker plugin
+  copy:
+    src: check_docker_container.sh
+    dest: /usr/lib/nagios/plugins
+    
+- name: Turn on execute permission for check_docker_container.sh
+  file:
+    path: /usr/lib/nagios/plugins/check_docker_container.sh
+    mode: a+x
+    
+- name: Restart NRPE
+  systemd:
+    name: nagios-nrpe-server
+    state: restarted
+    enabled: true

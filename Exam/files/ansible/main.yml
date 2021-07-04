@@ -1,0 +1,26 @@
+---
+- hosts: docker
+  become: true
+  roles:
+    - geerlingguy.java
+    - docker-Ubuntu
+    - nrpe
+    - dob-network
+
+- hosts: nagios
+  become: true
+  roles:
+    - add-hosts
+    - nagios
+
+- hosts: jenkins
+  become: true
+  vars:
+    jenkins_hostname: jenkins.dob.lab
+  roles:
+    - add-hosts
+    - update-cache
+    - geerlingguy.java
+    - geerlingguy.jenkins
+
+- import_playbook: jenkins-plugins.yml

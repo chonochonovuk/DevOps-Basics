@@ -1,0 +1,32 @@
+---
+# Docker
+- name: Run the equivalent of apt-get update as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install docker and some dependencies
+  apt:
+    name: python3-pip, docker.io
+    state: present
+
+- name: start docker service
+  systemd:
+    name: docker
+    state: started  
+
+- name: Install docker python module
+  pip:
+    name: docker
+    
+- name: Adding user vagrant to docker group  
+  user: 
+    name: vagrant
+    groups: docker
+    append: yes
+    
+- name: Adding user nagios to docker group  
+  user: 
+    name: nagios
+    groups: docker
+    append: yes
+

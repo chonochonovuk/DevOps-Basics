@@ -1,0 +1,70 @@
+1.Make sure docker container are named as defined in Nagios to check. 
+2.Login as admin
+3.Manage Jenkins
+4.Manage Credentials
+5.Jenkins -> Global Credentials -> Add Credentials
+6.Username and password (vagrant)
+7.Dashboard -> Manage Jenkins -> Configure System -> SSH Remote Host (Hostname: docker.dob.lab, port: 22 , Username and Password, check!)
+8.Dashboard -> Manage Jenkins -> Manage Nodes and Clouds -> New Node -. Name: slave !permanent
+9.Config -> Remote root directory: /vagrant , executors 2, Labels: nrpe-docker, Usage: Only build labeled jobs \
+Launch method via SSH : docker.dob.lab, User Pass,
+!!!!!!! Host Key Verification Strategy: Non Verification
+10.Only If failed Relaunch! 
+11.Dashboard -> New Item -> Docker Remote and Git -> Freestyle Prj -> Save \
+Git Project -> https://github.com/chonochonovuk/DevOpsDocker.git -> Choose second Advanced -> 
+Restrict where this project can be run: nrpe-docker
+Use custom workspace: /vagrant
+Source Code Management -> Git -> https://github.com/chonochonovuk/DevOpsDocker.git/
+Branch Specifier -> */main
+Build Triggers -> Poll SCM -> H/2 * * * *
+Build -> Add Build Step: 
+Execute Shell
+
+cd /vagrant/web
+docker image build -t bulphp .
+
+Add Build Step: 
+Execute Shell
+
+cd /vagrant/db
+docker image build -t bulsql .
+
+Add Build Step: 
+Execute Shell
+
+docker container rm -f dob-http || true
+docker container run -d --net dob-network -p 80:80 --name dob-http -v /vagrant/web:/var/www/html bulphp
+
+Add Build Step: 
+Execute Shell
+
+docker container rm -f dob-mysql || true
+docker container run -d --net dob-network --name dob-mysql -e MYSQL_ROOT_PASSWORD=nE5kMc7JCGNqwDQN bulsql
+
+Save -> Build Now
+
+DB WON'T WORK
+
+!!!! The hostname in index.php is bulmysql -> Change host name in index.php = dob-mysql -> For Accomplishing Git Scheduled Task
+
+Wait and photo ;)
+
+
+TIME FOR NAGIOS FRONT
+
+http://localhost:8081/nagios4/
+
+Photos please....
+
+
+
+
+
+
+
+
+
+
+
+
+

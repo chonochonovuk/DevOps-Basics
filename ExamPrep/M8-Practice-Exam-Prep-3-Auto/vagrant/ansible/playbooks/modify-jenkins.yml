@@ -1,0 +1,6 @@
+---
+- hosts: jenkins
+  become: true
+  roles:
+    - add-credentials
+    - add-node

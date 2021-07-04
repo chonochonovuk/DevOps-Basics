@@ -1,0 +1,1 @@
+Build javaspring image and save it as tar zip file  in /service folder

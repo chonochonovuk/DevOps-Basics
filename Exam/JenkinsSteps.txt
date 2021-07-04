@@ -1,0 +1,79 @@
+1.Make sure docker container are named as defined in Nagios to check. 
+2.Login as admin
+3.Manage Jenkins
+4.Manage Credentials
+5.Jenkins -> Global Credentials -> Add Credentials
+6.Username and password (vagrant)
+7.Dashboard -> Manage Jenkins -> Configure System -> SSH Remote Host (Hostname: dvm.dob.exam, port: 22 , Username and Password, check!)
+8.Dashboard -> Manage Jenkins -> Manage Nodes and Clouds -> New Node -. Name: slave !permanent
+9.Config -> Remote root directory: /vagrant , executors 2, Labels: nrpe-docker, Usage: Only build labeled jobs \
+Launch method via SSH : dvm.dob.exam, User Pass,
+!!!!!!! Host Key Verification Strategy: Non Verification
+10.Only If failed Relaunch! 
+11.Dashboard -> New Item -> Docker Remote and Git -> Freestyle Prj -> Save \
+Git Project -> https://github.com/shekeriev/dob-2021-04-exam.git -> Choose second Advanced -> 
+Restrict where this project can be run: nrpe-docker
+Use custom workspace: /vagrant
+Source Code Management -> Git -> https://github.com/shekeriev/dob-2021-04-exam.git/
+Branch Specifier -> */master
+Build Triggers -> Poll SCM -> H/2 * * * *
+Build -> Add Build Step: 
+Execute Shell
+
+cd /vagrant/consumer
+docker image build -t consumer .
+
+Add Build Step: 
+Execute Shell
+
+cd /vagrant/producer
+docker image build -t producer .
+
+Add Build Step: 
+Execute Shell
+
+cd /vagrant/storage
+docker image build -t storage .
+
+Add Build Step: 
+Execute Shell
+
+docker container rm -f dob-consumer || true
+docker container run -d --net dob-network -p 80:5000 --name dob-consumer consumer
+
+Add Build Step: 
+Execute Shell
+
+docker container rm -f dob-storage || true
+docker container run -d --net dob-network --name dob-storage -e MYSQL_ROOT_PASSWORD=Exam-2021 storage
+
+Add Build Step: 
+Execute Shell
+
+docker container rm -f dob-producer || true
+docker container run -d --net dob-network --name dob-producer producer
+
+
+Save -> Build Now
+
+Wait and photo ;)
+
+
+TIME FOR NAGIOS FRONT
+
+http://localhost:8001/nagios4/
+
+Photos please....
+
+
+
+
+
+
+
+
+
+
+
+
+

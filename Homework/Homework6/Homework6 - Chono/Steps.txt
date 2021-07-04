@@ -1,0 +1,33 @@
+!!!!!!  During the installation of Nagios core on Ubuntu, you may be asked to configure Postfix mail settings.
+        Select ‘No configuration’ option and click on ‘ok’ to complete setup. !!!!!!
+        
+        
+1.Create and provision two VMs with Vagrant 
+2.Provision the host where Docker will run with (docker.sh) - for installing Docker Engine and its dependencies
+3.Installation process on Ubuntu for Nagios cannot be automated with vagrant script ,because of Posfix Dialog Box which appear during on process of installation.
+4.Manual steps on installation are :
+  
+  a. Install Nagios Core and Nagios Plugins on Ubuntu by using apt command
+  b. During the installation of Nagios core, you may be asked to configure Postfix mail settings. Select ‘No configuration’ option and click on ‘ok’ to complete setup.
+  c. sudo a2enmod authz_groupfile auth_digest
+  d. sudo vi /etc/apache2/conf-enabled/nagios4-cgi.conf
+  e. add a user in authentication file by using following command - sudo htdigest -c /etc/nagios4/htdigest.users Nagios4 nagiosadmin
+  f. sudo systemctl restart apache2
+5.Create Template ,Define Host and HostGroup for and with Docker Host and relevant services on Master Host
+6.In the main configuration file add my custom cfg_dir
+7.Check the configuration
+8.Vagrant SSH Docker Host
+9.Install nagios-nrpe-server and plugins
+10.sudo vi /etc/nagios/nrpe.cfg
+11.Test if work with NRPE check
+12.Create chono-commands.cfg in my directory
+13.Add my nagios user (nrpe_user=nagios) - sudo visudo on Docker Host
+14.Start a new docker container on Docker Host
+15.chmod +x check_docker_container.sh
+16.move it to the /usr/lib/nagios/plugins folder
+17.Add the following line at the end of the file at /etc/nagios/nrpe.cfg
+18.Check that we can query the container
+19.Test again on master
+20.add a new command
+21.add one service-docker-container-check-nrpe.cfg
+22.Nagios Front Working Properly !!!!

@@ -1,0 +1,3 @@
+Build bulphp
+Build bulsql
+Save them in /service folder as .tar compressed files

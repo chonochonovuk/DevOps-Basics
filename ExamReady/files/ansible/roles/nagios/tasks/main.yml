@@ -1,0 +1,34 @@
+---
+# Nagios config
+- name: Run the equivalent of apt-get update as a separate step
+  apt:
+    update_cache: yes
+    
+- name: copy logos
+  copy:
+    src: "{{ item }}"
+    dest: /usr/share/nagios4/htdocs/images/logos
+  with_fileglob:
+      - /vagrant/roles/nagios/files/logos/*.png
+      
+- name: Copy content of my-custom-cfg
+  copy:
+    src: my-custom-dir
+    dest: /etc/nagios4/objects/
+    
+- name: Copy nagios.cfg file
+  copy:
+    src: nagios.cfg
+    dest: /etc/nagios4/nagios.cfg
+    
+- name: Copy localhost.cfg file
+  copy:
+    src: localhost.cfg
+    dest: /etc/nagios4/objects/localhost.cfg
+      
+- name: Restart Nagios
+  systemd:
+    name: nagios4
+    state: restarted
+    enabled: true
+

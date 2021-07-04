@@ -1,0 +1,46 @@
+1.Nagios html logos location -  /usr/share/nagios4/htdocs/images/logos
+2.Plugins location - /usr/lib/nagios/plugins
+3.Nagios configuration files location - /etc/nagios4/objects/
+4.Localhost file - /etc/nagios4/objects/localhost.cfg
+5.nagios.cfg - /etc/nagios4/nagios.cfg
+6.Use sudo to check nagios.cfg - sudo nagios4 -v /etc/nagios4/nagios.cfg
+
+!!!! Ready Commands to install Nagios Core on nagios host
+- sudo apt-get update -y
+1.sudo apt-get install -y nagios4 nagios-plugins-contrib nagios-nrpe-plugin
+2.sudo a2enmod authz_groupfile auth_digest
+3.sudo vi /etc/apache2/conf-enabled/nagios4-cgi.conf
+4.sudo htdigest -c /etc/nagios4/htdigest.users Nagios4 nagiosadmin
+  - password
+5.sudo systemctl restart apache2
+
+     !!!!! ANSIBLE !!!!!!  WARNING -> SSH-KEYGEN on Ansible
+     
+6.sudo cp /nagios/ /etc/nagios4/objects
+7.sudo vi /etc/nagios4/nagios.cfg
+
+cfg_dir=/nagios/my-custom-dir/ansibleHost
+cfg_dir=/nagios/my-custom-dir/commands
+cfg_dir=/nagios/my-custom-dir/jenkinsHost
+cfg_dir=/nagios/my-custom-dir/dockerHost
+cfg_dir=/nagios/my-custom-dir/groups
+
+8.sudo cp /nagios/logos/*.png /usr/share/nagios4/htdocs/images/logos
+9.sudo cp /nagios/my-custom-dir/localhost.cfg /etc/nagios4/objects/localhost.cfg
+
+10.After nrpe restart nagios4
+
+!!!! Commands to install Nrpe on docker host
+- sudo apt-get update -y
+1.sudo apt-get install -y nagios-nrpe-server nagios-plugins-contrib nagios-nrpe-plugin
+2.sudo visudo (nagios  ALL=(ALL:ALL) NOPASSWD:ALL )
+
+            !!!!!!! ANSIBLE !!!!!!!! WARNING -> SSH-KEYGEN on Ansible
+               
+3.sudo cp /nagios/nrpe.cfg /etc/nagios/nrpe.cfg - TRY ANSIBLE
+4.chmod +x /nagios/check_docker_container.sh
+5.sudo mv /nagios/check_docker_container.sh /usr/lib/nagios/plugins
+6.sudo usermod -aG docker nagios
+7.sudo systemctl restart nagios-nrpe-server
+8.!!!! check_docker_container UNDERSCORE
+
